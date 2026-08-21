@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Contents</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-shell">
+        <header class="topbar">
+            <div class="brand-wrap">
+                <div class="brand-mark">S</div>
+                <div>
+                    <span class="eyebrow">Project</span>
+                    <h1>Dashboard Contents</h1>
+                </div>
+            </div>
+
+            <nav class="main-nav" aria-label="Main Navigation">
+                <a href="index.html">Dashboard</a>
+                <a class="active" href="contents.html">Contents</a>
+            </nav>
+
+            <div class="user-pill">Admin</div>
+        </header>
+
+        <main class="dashboard-grid">
+            <section class="card hero">
+                <div>
+                    <p class="eyebrow">Overview</p>
+                    <h2>Project structure and dashboard details</h2>
+                </div>
+                <div class="hero-metric">
+                    <span>Sections</span>
+                    <strong>4</strong>
+                </div>
+            </section>
+
+            <section class="card table-panel">
+                <div class="section-header">
+                    <div>
+                        <p class="eyebrow">Contents</p>
+                        <h3>Key dashboard modules</h3>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Overview</td>
+                            <td>High-level summary of sales, orders, and stock health.</td>
+                            <td><span class="badge success">Ready</span></td>
+                        </tr>
+                        <tr>
+                            <td>Inventory</td>
+                            <td>Includes products, reorder points, and stock monitoring.</td>
+                            <td><span class="badge success">Ready</span></td>
+                        </tr>
+                        <tr>
+                            <td>Logistics</td>
+                            <td>Shipment tracking and route performance updates.</td>
+                            <td><span class="badge warning">Queued</span></td>
+                        </tr>
+                        <tr>
+                            <td>Suppliers</td>
+                            <td>Supplier performance, reliability, and fulfillment metrics.</td>
+                            <td><span class="badge success">Ready</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>BFB 321 Supply Chain Dashboard</p>
+        </footer>
+    </div>
+</body>
+</html>

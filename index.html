@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-shell">
+        <header class="topbar">
+            <div class="brand-wrap">
+                <div class="brand-mark">S</div>
+                <div>
+                    <span class="eyebrow">BFB 321</span>
+                    <h1>Supply Chain Dashboard</h1>
+                </div>
+            </div>
+
+            <nav class="main-nav" aria-label="Main Navigation">
+                <a class="active" href="index.html">Dashboard</a>
+                <a href="contents.html">Contents</a>
+            </nav>
+
+            <div class="user-pill">Admin</div>
+        </header>
+
+        <main class="dashboard-grid">
+            <section class="hero card">
+                <div>
+                    <p class="eyebrow">Operations overview</p>
+                    <h2>Warehouse performance at a glance</h2>
+                </div>
+
+                <div class="hero-metric">
+                    <span>Fulfillment rate</span>
+                    <strong>96.4%</strong>
+                </div>
+            </section>
+
+            <section class="stats-grid" aria-label="Summary statistics">
+                <article class="stat-card card accent-blue">
+                    <div class="stat-label">Total Products</div>
+                    <div class="stat-value">1,248</div>
+                    <div class="stat-trend positive">+6.2% vs last month</div>
+                </article>
+
+                <article class="stat-card card accent-green">
+                    <div class="stat-label">Total Orders</div>
+                    <div class="stat-value">864</div>
+                    <div class="stat-trend positive">+12.8% this week</div>
+                </article>
+
+                <article class="stat-card card accent-amber">
+                    <div class="stat-label">Low Stock Items</div>
+                    <div class="stat-value">27</div>
+                    <div class="stat-trend warning">8 need restock</div>
+                </article>
+
+                <article class="stat-card card accent-purple">
+                    <div class="stat-label">Suppliers</div>
+                    <div class="stat-value">46</div>
+                    <div class="stat-trend positive">3 new contracts</div>
+                </article>
+            </section>
+
+            <section class="card table-panel">
+                <div class="section-header">
+                    <div>
+                        <p class="eyebrow">Inventory</p>
+                        <h3>Inventory Overview</h3>
+                    </div>
+                    <button class="ghost-button">Export</button>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Stock</th>
+                            <th>Reorder Point</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Product 1</td>
+                            <td>120</td>
+                            <td>50</td>
+                            <td><span class="badge success">In Stock</span></td>
+                        </tr>
+                        <tr>
+                            <td>Product 2</td>
+                            <td>20</td>
+                            <td>50</td>
+                            <td><span class="badge danger">Low Stock</span></td>
+                        </tr>
+                        <tr>
+                            <td>Product 3</td>
+                            <td>340</td>
+                            <td>100</td>
+                            <td><span class="badge success">Healthy</span></td>
+                        </tr>
+                        <tr>
+                            <td>Product 4</td>
+                            <td>58</td>
+                            <td>75</td>
+                            <td><span class="badge warning">Monitor</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <aside class="card side-panel">
+                <div class="section-header compact">
+                    <div>
+                        <p class="eyebrow">Logistics</p>
+                        <h3>Shipment status</h3>
+                    </div>
+                </div>
+
+                <div class="shipment-list">
+                    <div class="shipment-item">
+                        <div class="shipment-meta">
+                            <strong>Outbound - Cape Town</strong>
+                            <span>On schedule</span>
+                        </div>
+                        <div class="progress"><span style="width: 82%"></span></div>
+                    </div>
+
+                    <div class="shipment-item">
+                        <div class="shipment-meta">
+                            <strong>Inbound - Durban</strong>
+                            <span>Delayed 2h</span>
+                        </div>
+                        <div class="progress"><span style="width: 62%"></span></div>
+                    </div>
+
+                    <div class="shipment-item">
+                        <div class="shipment-meta">
+                            <strong>Return cycle</strong>
+                            <span>Healthy</span>
+                        </div>
+                        <div class="progress"><span style="width: 91%"></span></div>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="card small-panel">
+                <div class="section-header compact">
+                    <div>
+                        <p class="eyebrow">Suppliers</p>
+                        <h3>Supplier health</h3>
+                    </div>
+                </div>
+
+                <ul class="supplier-list">
+                    <li>
+                        <div>
+                            <strong>Alpha Logistics</strong>
+                            <span>Lead time: 4 days</span>
+                        </div>
+                        <span class="score good">92%</span>
+                    </li>
+                    <li>
+                        <div>
+                            <strong>Northwind Goods</strong>
+                            <span>Lead time: 6 days</span>
+                        </div>
+                        <span class="score medium">76%</span>
+                    </li>
+                    <li>
+                        <div>
+                            <strong>West Vale Retail</strong>
+                            <span>Lead time: 3 days</span>
+                        </div>
+                        <span class="score good">89%</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="card small-panel">
+                <div class="section-header compact">
+                    <div>
+                        <p class="eyebrow">Priority</p>
+                        <h3>Next actions</h3>
+                    </div>
+                </div>
+
+                <ul class="task-list">
+                    <li>Review 8 low-stock SKUs before Friday.</li>
+                    <li>Confirm supplier delivery for Durban route.</li>
+                    <li>Approve 3 warehouse staffing adjustments.</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>BFB 321 Supply Chain Dashboard</p>
+        </footer>
+    </div>
+</body>
+</html>
