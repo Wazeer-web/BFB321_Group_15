@@ -1,231 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kopano Home & Lifestyle Inventory Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kopano Home & Lifestyle simulated inventory and supply-chain dashboard for BFB321.">
+  <title>Kopano Home &amp; Lifestyle | Inventory Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="dashboard-shell">
-        <header class="topbar">
-            <div class="brand-wrap">
-                <div class="brand-mark">K</div>
-                <div>
-                    <span class="eyebrow">BFB 321 Project</span>
-                    <h1>Kopano Home & Lifestyle</h1>
-                </div>
-            </div>
-
-            <nav class="main-nav" aria-label="Main Navigation">
-                <a class="active" href="index.html">Dashboard</a>
-                <a href="contents.html">Contents</a>
-            </nav>
-
-            <div class="user-pill">Operations View</div>
-        </header>
-
-        <main class="dashboard-grid">
-
-            <section class="hero card">
-                <div>
-                    <p class="eyebrow">Inventory Management</p>
-                    <h2>Inventory &amp; Supply Chain Performance at a Glance</h2>
-                </div>
-
-                <div class="hero-metric">
-                    <span>Fulfilment Rate</span>
-                    <strong>96.4%</strong>
-                    <small>Simulated data only</small>
-                </div>
-            </section>
-
-            <section class="stats-grid" aria-label="Summary statistics">
-
-                <article class="stat-card card accent-blue">
-                    <div class="stat-label">Total Products</div>
-                    <div class="stat-value">1,248</div>
-                    <div class="stat-trend positive">+6.2% vs last month</div>
-                </article>
-
-                <article class="stat-card card accent-green">
-                    <div class="stat-label">Total Orders</div>
-                    <div class="stat-value">864</div>
-                    <div class="stat-trend positive">+12.8% this week</div>
-                </article>
-
-                <article class="stat-card card accent-amber">
-                    <div class="stat-label">Low Stock Items</div>
-                    <div class="stat-value">27</div>
-                    <div class="stat-trend warning">8 require replenishment</div>
-                </article>
-
-                <article class="stat-card card accent-purple">
-                    <div class="stat-label">Suppliers</div>
-                    <div class="stat-value">46</div>
-                    <div class="stat-trend warning">3 require follow-up</div>
-                </article>
-
-                <article class="stat-card card accent-teal">
-                    <div class="stat-label">Fulfilment Rate</div>
-                    <div class="stat-value">96.4%</div>
-                    <div class="stat-trend warning">3.6% of orders delayed</div>
-                </article>
-
-            </section>
-
-            <section class="card table-panel">
-                <div class="section-header">
-                    <div>
-                        <p class="eyebrow">Inventory</p>
-                        <h3>Inventory Overview</h3>
-                    </div>
-                    <button class="ghost-button">Export</button>
-                </div>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Stock</th>
-                            <th>Reorder Point</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>Dinner Plates</td>
-                            <td>120</td>
-                            <td>150</td>
-                            <td><span class="badge danger">Low Stock</span></td>
-                        </tr>
-
-                        <tr>
-                            <td>Storage Containers</td>
-                            <td>32</td>
-                            <td>90</td>
-                            <td><span class="badge danger">Reorder</span></td>
-                        </tr>
-
-                        <tr>
-                            <td>Bath Towels</td>
-                            <td>140</td>
-                            <td>110</td>
-                            <td><span class="badge success">Healthy</span></td>
-                        </tr>
-
-                        <tr>
-                            <td>Bed Sheets</td>
-                            <td>52</td>
-                            <td>80</td>
-                            <td><span class="badge warning">Monitor</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <aside class="card side-panel">
-                <div class="section-header compact">
-                    <div>
-                        <p class="eyebrow">Logistics</p>
-                        <h3>Shipment Status</h3>
-                    </div>
-                </div>
-
-                <div class="shipment-list">
-
-                    <div class="shipment-item">
-                        <div class="shipment-meta">
-                            <strong>Dinner Plates Replenishment</strong>
-                            <span>Delayed 3 days</span>
-                        </div>
-                        <div class="progress">
-                            <span style="width: 56%"></span>
-                        </div>
-                    </div>
-
-                    <div class="shipment-item">
-                        <div class="shipment-meta">
-                            <strong>Bath Towels Inbound</strong>
-                            <span>Stock risk</span>
-                        </div>
-                        <div class="progress">
-                            <span style="width: 64%"></span>
-                        </div>
-                    </div>
-
-                    <div class="shipment-item">
-                        <div class="shipment-meta">
-                            <strong>Bed Sheets Dispatch</strong>
-                            <span>On schedule</span>
-                        </div>
-                        <div class="progress">
-                            <span style="width: 88%"></span>
-                        </div>
-                    </div>
-
-                </div>
-            </aside>
-
-            <section class="card small-panel">
-                <div class="section-header compact">
-                    <div>
-                        <p class="eyebrow">Suppliers</p>
-                        <h3>Supplier Health</h3>
-                    </div>
-                </div>
-
-                <ul class="supplier-list">
-
-                    <li>
-                        <div>
-                            <strong>TextileWorks SA</strong>
-                            <span>Lead time: 7 days</span>
-                        </div>
-                        <span class="score medium">72%</span>
-                    </li>
-
-                    <li>
-                        <div>
-                            <strong>HomeCraft Goods</strong>
-                            <span>Lead time: 4 days</span>
-                        </div>
-                        <span class="score good">94%</span>
-                    </li>
-
-                    <li>
-                        <div>
-                            <strong>EcoNest Living</strong>
-                            <span>Lead time: 5 days</span>
-                        </div>
-                        <span class="score good">88%</span>
-                    </li>
-
-                </ul>
-            </section>
-
-            <section class="card small-panel">
-                <div class="section-header compact">
-                    <div>
-                        <p class="eyebrow">Priority</p>
-                        <h3>Next Actions</h3>
-                    </div>
-                </div>
-
-                <ul class="task-list">
-                    <li>Review Dinner Plates and Storage Containers for replenishment.</li>
-                    <li>Follow up on the delayed Dinner Plates replenishment shipment.</li>
-                    <li>Monitor Bed Sheet stock as it approaches the reorder point.</li>
-                    <li>Review supplier performance for suppliers linked to low-stock items.</li>
-                </ul>
-            </section>
-
-        </main>
-
-        <footer class="footer">
-            <p>BFB 321 - Kopano Home &amp; Lifestyle Inventory Dashboard | Simulated data only</p>
-        </footer>
+<div class="dashboard-shell">
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="brand-mark" aria-hidden="true">K</div>
+      <div><span class="eyebrow">BFB321 · Group 15</span><h1>Kopano Home &amp; Lifestyle</h1></div>
     </div>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="active" aria-current="page" href="index.html">Dashboard</a>
+      <a href="contents.html">Contents</a>
+    </nav>
+    <div class="user-pill">Simulated operations view</div>
+  </header>
+
+  <main class="dashboard-grid">
+    <section class="hero card" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Inventory management</p>
+        <h2 id="page-title">Inventory &amp; Supply Chain Performance at a Glance</h2>
+        <p class="text-secondary mb-0">Review stock risks, replenishment priorities and delivery exceptions.</p>
+      </div>
+      <div class="hero-metric"><span>Simulated fulfilment rate</span><strong id="fulfilmentRate">96.4%</strong><small>Illustrative data only</small></div>
+    </section>
+
+    <section class="stats-grid" aria-label="Summary statistics">
+      <article class="stat-card card accent-blue"><div class="stat-label">Tracked products</div><div class="stat-value" id="totalProducts">4</div><div class="stat-trend">Simulated SKUs</div></article>
+      <article class="stat-card card accent-green"><div class="stat-label">Open orders</div><div class="stat-value" id="openOrders">3</div><div class="stat-trend">Illustrative orders</div></article>
+      <article class="stat-card card accent-amber"><div class="stat-label">Low-stock items</div><div class="stat-value" id="lowStockCount">3</div><div class="stat-trend warning">At or below reorder point</div></article>
+      <article class="stat-card card accent-purple"><div class="stat-label">Suppliers</div><div class="stat-value">3</div><div class="stat-trend">Simulated supplier records</div></article>
+      <article class="stat-card card accent-teal"><div class="stat-label">Delayed deliveries</div><div class="stat-value" id="delayedCount">1</div><div class="stat-trend warning">Require follow-up</div></article>
+    </section>
+
+    <section class="card table-panel" aria-labelledby="inventory-heading">
+      <div class="section-header">
+        <div><p class="eyebrow">Stock control</p><h2 id="inventory-heading">Inventory overview</h2></div>
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+          <label class="visually-hidden" for="inventorySearch">Search inventory</label>
+          <input id="inventorySearch" class="form-control form-control-sm" type="search" placeholder="Search product or SKU">
+          <button class="ghost-button btn btn-outline-primary btn-sm" id="exportButton" type="button">Export CSV</button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle" id="inventoryTable">
+          <caption class="visually-hidden">Simulated stock quantities and reorder points. Select a heading to sort.</caption>
+          <thead><tr>
+            <th scope="col"><button type="button" class="sort-button" data-inventory-sort="name">Product ↕</button></th>
+            <th scope="col"><button type="button" class="sort-button" data-inventory-sort="sku">SKU ↕</button></th>
+            <th scope="col"><button type="button" class="sort-button" data-inventory-sort="stock">Stock ↕</button></th>
+            <th scope="col"><button type="button" class="sort-button" data-inventory-sort="reorder">Reorder point ↕</button></th>
+            <th scope="col">Supplier</th><th scope="col">Status</th>
+          </tr></thead>
+          <tbody id="inventoryBody"></tbody>
+        </table>
+      </div>
+      <p class="small text-secondary mb-0">Status is calculated from stock on hand compared with the reorder point.</p>
+    </section>
+
+    <aside class="card side-panel" aria-labelledby="actions-heading">
+      <div class="section-header compact"><div><p class="eyebrow">Priority</p><h2 id="actions-heading">Next actions</h2></div></div>
+      <ul class="task-list" id="actionList"><li>Review items at or below the reorder point.</li><li>Follow up on delayed deliveries.</li></ul>
+      <hr>
+      <h3 class="h5">Update stock quantity</h3>
+      <form id="stockForm" novalidate>
+        <div class="mb-3"><label class="form-label" for="stockProduct">Product</label><select class="form-select" id="stockProduct" name="product" required><option value="">Choose a product</option></select><div class="invalid-feedback">Select a product.</div></div>
+        <div class="mb-3"><label class="form-label" for="newStock">New stock quantity</label><input class="form-control" id="newStock" name="quantity" type="number" min="0" step="1" inputmode="numeric" required><div class="form-text">Enter a whole number of units (zero or more).</div><div class="invalid-feedback">Enter a whole number that is zero or greater.</div></div>
+        <button class="btn btn-primary w-100" type="submit">Update stock</button>
+        <p id="stockMessage" class="form-message mt-2" role="status" aria-live="polite"></p>
+      </form>
+    </aside>
+
+    <section class="card table-panel delivery-panel" aria-labelledby="delivery-heading">
+      <div class="section-header">
+        <div><p class="eyebrow">Logistics</p><h2 id="delivery-heading">Delivery board</h2><p class="small text-secondary mb-0">Illustrative shipment records; updates are temporary in this browser.</p></div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exceptionModal">Update delivery exception</button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle" id="deliveryTable">
+          <caption class="visually-hidden">Simulated delivery routes, vehicle IDs, estimated arrival times and statuses.</caption>
+          <thead><tr>
+            <th scope="col"><button type="button" class="sort-button" data-delivery-sort="route">Route ↕</button></th>
+            <th scope="col"><button type="button" class="sort-button" data-delivery-sort="vehicle">Vehicle ↕</button></th>
+            <th scope="col"><button type="button" class="sort-button" data-delivery-sort="eta">ETA ↕</button></th>
+            <th scope="col"><button type="button" class="sort-button" data-delivery-sort="status">Status ↕</button></th>
+            <th scope="col">Exception</th>
+          </tr></thead>
+          <tbody id="deliveryBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card small-panel" aria-labelledby="supplier-heading">
+      <div class="section-header compact"><div><p class="eyebrow">Procurement</p><h2 id="supplier-heading">Supplier health</h2></div></div>
+      <div class="table-responsive"><table class="table table-sm align-middle">
+        <caption class="visually-hidden">Simulated supplier lead times and reliability scores.</caption>
+        <thead><tr><th scope="col">Supplier</th><th scope="col">Lead time</th><th scope="col">Reliability</th></tr></thead>
+        <tbody>
+          <tr><td>TimberWorks SA</td><td>7 days</td><td><span class="badge text-bg-warning">72%</span></td></tr>
+          <tr><td>MetalCraft Suppliers</td><td>4 days</td><td><span class="badge text-bg-success">94%</span></td></tr>
+          <tr><td>FabricWorks SA</td><td>5 days</td><td><span class="badge text-bg-success">88%</span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="card small-panel" aria-labelledby="eoq-heading">
+      <div class="section-header compact"><div><p class="eyebrow">Supply-chain model preview</p><h2 id="eoq-heading">EOQ calculator</h2></div></div>
+      <form id="eoqForm" novalidate>
+        <div class="mb-3"><label for="annualDemand" class="form-label">Annual demand (D)</label><input class="form-control" id="annualDemand" type="number" min="0.01" step="any" value="12000" required><div class="invalid-feedback">Enter a number greater than zero.</div></div>
+        <div class="mb-3"><label for="orderCost" class="form-label">Ordering cost per order (S, R)</label><input class="form-control" id="orderCost" type="number" min="0.01" step="any" value="50" required><div class="invalid-feedback">Enter a number greater than zero.</div></div>
+        <div class="mb-3"><label for="holdingCost" class="form-label">Holding cost per unit per year (H, R)</label><input class="form-control" id="holdingCost" type="number" min="0.01" step="any" value="2" required><div class="invalid-feedback">Enter a number greater than zero.</div></div>
+        <button class="btn btn-outline-primary" type="submit">Calculate EOQ</button>
+        <div id="eoqResult" class="eoq-result mt-3" role="status" aria-live="polite">Enter valid values to calculate an order quantity.</div>
+      </form>
+      <p class="small text-secondary mt-3 mb-0">The standalone Python model and its unit tests are submitted separately in <code>models/</code> and <code>tests/</code>.</p>
+    </section>
+  </main>
+
+  <footer class="footer"><p>BFB321 · Kopano Home &amp; Lifestyle · Simulated proof of concept; not real operational data.</p></footer>
+</div>
+
+<div class="modal fade" id="exceptionModal" tabindex="-1" aria-labelledby="exceptionModalTitle" aria-hidden="true">
+  <div class="modal-dialog"><div class="modal-content">
+    <form id="exceptionForm" novalidate>
+      <div class="modal-header"><h2 class="modal-title fs-5" id="exceptionModalTitle">Update delivery exception</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+      <div class="modal-body">
+        <div class="mb-3"><label for="deliveryVehicle" class="form-label">Vehicle</label><select id="deliveryVehicle" class="form-select" required><option value="">Choose a delivery</option></select><div class="invalid-feedback">Select a delivery.</div></div>
+        <div class="mb-3"><label for="deliveryStatus" class="form-label">Status</label><select id="deliveryStatus" class="form-select" required><option value="">Choose a status</option><option>On schedule</option><option>At risk</option><option>Delayed</option><option>Delivered</option></select><div class="invalid-feedback">Select a status.</div></div>
+        <div class="mb-3"><label for="deliveryException" class="form-label">Exception or update note</label><textarea id="deliveryException" class="form-control" rows="3" maxlength="250" required></textarea><div class="form-text">Maximum 250 characters. Use simulated information only.</div><div class="invalid-feedback">Enter an update note.</div></div>
+      </div>
+      <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-primary">Save update</button></div>
+    </form>
+  </div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
