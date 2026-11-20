@@ -13,8 +13,16 @@ from flask import Flask, jsonify, render_template, request
 from mysql.connector import IntegrityError
 
 from db import get_db_connection
+from config import configurations
 
 app = Flask(__name__)
+
+environment = os.getenv("FLASK_ENV", "development").lower()
+
+app.config.from_object(
+    configurations.get(environment, configurations["development"])
+)
+
 app.config["JSON_SORT_KEYS"] = False
 
 # Log application errors to the terminal and to kopano.log.
@@ -709,4 +717,9 @@ def handle_internal_error(error):
 # -----------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    environment = os.getenv("FLASK_ENV", "development").lower()
+
+    if environment == "production":
+        app.run(debug=False)
+    else:
+        app.run(debug=True)

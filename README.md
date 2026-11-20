@@ -304,7 +304,63 @@ Completed functionality includes:
 
 Further deployment documentation, backup and recovery procedures, and final integration checks form part of the project completion process.
 
-## 11. Team Contributions
+## 11. Deployment, Backup and Recovery
+
+### Database Backup
+
+The project includes a PowerShell backup script located at:
+
+`scripts/backup_database.ps1`
+
+The script uses MySQL's `mysqldump` utility to create a timestamped SQL backup of the `kopano_inventory` database.
+
+To create a backup, run:
+
+```powershell
+.\scripts\backup_database.ps1
+```
+
+The script prompts for the MySQL password and saves the backup in the `backups/` directory.
+
+### Database Recovery
+
+A database recovery script is provided at:
+
+`scripts/restore_database.ps1`
+
+To restore a previous backup, run:
+
+```powershell
+.\scripts\restore_database.ps1
+```
+
+The user selects an existing backup file and must explicitly confirm the recovery operation.
+
+**Warning:** Restoring a database backup can overwrite existing database records. A backup of the current database should be created before performing a recovery.
+
+### Environment Configuration
+
+Database credentials are stored in a local `.env` file and are excluded from version control.
+
+The `.env.example` file provides a template for configuring the application on another computer.
+
+### Logging
+
+The application records activity and errors through Python logging. Log information is written to the terminal and `kopano.log`.
+
+### Deployment Considerations
+
+Before production deployment:
+
+- Configure production environment variables and a secure Flask secret key.
+- Disable Flask debug mode.
+- Use a production-ready WSGI server.
+- Restrict database access and use appropriate database permissions.
+- Store database backups securely.
+- Test database recovery procedures.
+- Monitor application logs and database availability.
+
+## 12. Team Contributions
 
 | Team Member | Student Number | Contribution |
 |---|---|---|

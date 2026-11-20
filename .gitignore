@@ -15,3 +15,6 @@ venv/
 
 # Logs
 *.log
+
+# Database backups (keep private and out of GitHub)
+backups/
