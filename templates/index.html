@@ -6,7 +6,7 @@
   <meta name="description" content="Kopano Home & Lifestyle simulated inventory and supply-chain dashboard for BFB321.">
   <title>Kopano Home &amp; Lifestyle | Inventory Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 <div class="dashboard-shell">
@@ -16,8 +16,8 @@
       <div><span class="eyebrow">BFB321 · Group 15</span><h1>Kopano Home &amp; Lifestyle</h1></div>
     </div>
     <nav class="main-nav" aria-label="Main navigation">
-      <a class="active" aria-current="page" href="index.html">Dashboard</a>
-      <a href="contents.html">Contents</a>
+      <a class="active" aria-current="page" href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('contents') }}">Contents</a>
     </nav>
     <div class="user-pill">Simulated operations view</div>
   </header>
@@ -142,6 +142,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="app.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>

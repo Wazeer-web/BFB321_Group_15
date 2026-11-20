@@ -1,2 +1,17 @@
+# Python cache files
 __pycache__/
 *.py[cod]
+
+# Virtual environment
+venv/
+.env
+
+# Environment and local configuration
+.env.*
+!.env.example
+
+# IDE and editor files
+.vscode/
+
+# Logs
+*.log
