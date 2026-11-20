@@ -1,13 +1,13 @@
-# BFB321 — Group 15
+# BFB321 – Group 15
 ## Kopano Home & Lifestyle Inventory Dashboard
 
-### Group Members
+## Group Members
 
-| Name and Surname | Student Number |
-|---|---|
-| Wazeer Parker | U21529320 |
-| Fayyad Gani | U23629968 |
-| Ilma Osman | U23528037 |
+| Name and Surname | Student Number | Contribution |
+|---|---|---|
+| Wazeer Parker | U21529320 | 33.33% |
+| Fayyad Gani | U23629968 | 33.33% |
+| Ilma Osman | U23528037 | 33.33% |
 
 ---
 
@@ -19,16 +19,16 @@ The system is designed to support inventory monitoring, stock management, suppli
 
 The application uses a Flask backend connected to a MySQL relational database. Data is retrieved and updated through REST API endpoints, allowing dashboard information to reflect database records.
 
-The project also includes a standalone Python EOQ model with automated unit tests to verify inventory calculations.
+The project also includes a standalone Python EOQ model with automated unit tests.
 
-## 2. Features
+## 2. System Features
 
 ### Inventory Management
 - Inventory overview and stock-level monitoring.
 - Product search and sorting.
-- Stock quantity updates.
+- Stock quantity updates saved to MySQL.
 - Product creation, editing and deletion through the API.
-- Low-stock identification.
+- Automated low-stock identification.
 - CSV export of inventory data.
 
 ### Supplier Management
@@ -38,14 +38,14 @@ The project also includes a standalone Python EOQ model with automated unit test
 ### Delivery Management
 - Delivery tracking and status monitoring.
 - Delivery creation, retrieval, updating and deletion through the API.
-- Delivery exception updates from the dashboard.
+- Delivery exception and status updates from the dashboard.
 
 ### Dashboard and Calculations
-- Live dashboard statistics from the database.
+- Live dashboard statistics retrieved from the database.
 - Inventory and delivery summaries.
 - Economic Order Quantity (EOQ) calculator.
 - Standalone Python EOQ calculation model.
-- Automated unit tests.
+- Automated unit and API validation tests.
 
 ## 3. Technologies Used
 
@@ -67,25 +67,40 @@ The project also includes a standalone Python EOQ model with automated unit test
 
 The application uses a MySQL database named `kopano_inventory`.
 
-The database consists of three related tables:
+The database consists of three related tables.
 
-**Suppliers**
-- Stores supplier names and contact information.
-- Primary key: `supplier_id`.
+### Suppliers
+Stores supplier names and contact information.
 
-**Products**
-- Stores product details, categories, SKUs, prices and stock quantities.
-- Primary key: `product_id`.
-- Foreign key: `supplier_id`, referencing the suppliers table.
+- Primary key: `supplier_id`
+- Unique field: `email`
 
-**Deliveries**
-- Stores delivery references, expected dates, actual dates, statuses and notes.
-- Primary key: `delivery_id`.
-- Foreign key: `supplier_id`, referencing the suppliers table.
+### Products
+Stores product details, categories, SKUs, prices and stock quantities.
+
+- Primary key: `product_id`
+- Foreign key: `supplier_id`, referencing `suppliers.supplier_id`
+- Unique field: `sku`
+
+### Deliveries
+Stores delivery references, expected dates, actual dates, statuses and notes.
+
+- Primary key: `delivery_id`
+- Foreign key: `supplier_id`, referencing `suppliers.supplier_id`
+- Unique field: `delivery_reference`
+
+### Relationships
+
+- One supplier can supply multiple products.
+- One supplier can be associated with multiple deliveries.
+- Each product belongs to one supplier.
+- Each delivery is associated with one supplier.
+
+The database includes primary keys, foreign keys, unique constraints, CHECK constraints, indexes and `created_at` and `updated_at` timestamp fields.
 
 ### Entity Relationship Diagram
 
-The ERD is available in:
+The Entity Relationship Diagram is available at:
 
 `database/ERD-Diagram.png`
 
@@ -93,8 +108,8 @@ The ERD is available in:
 
 | File | Purpose |
 |---|---|
-| `database/schema.sql` | Creates the database tables, constraints and indexes. |
-| `database/seed.sql` | Inserts sample suppliers, products and deliveries. |
+| `database/schema.sql` | Creates the database tables, constraints and indexes |
+| `database/seed.sql` | Inserts sample suppliers, products and deliveries |
 
 ## 5. Project Structure
 
@@ -117,6 +132,10 @@ BFB321_Group_15/
 ├── models/
 │   └── eoq.py
 │
+├── scripts/
+│   ├── backup_database.ps1
+│   └── restore_database.ps1
+│
 ├── static/
 │   ├── css/
 │   │   └── style.css
@@ -124,14 +143,15 @@ BFB321_Group_15/
 │       └── app.js
 │
 ├── templates/
-│   ├── index.html
-│   └── contents.html
+│   ├── contents.html
+│   └── index.html
 │
 └── tests/
+    ├── test_api.py
     └── test_eoq.py
 ```
 
-The `.env` file and virtual environment are kept locally and are excluded from version control.
+The `.env` file, virtual environment, application log and database backups are kept locally and excluded from version control.
 
 ## 6. Setup and Installation
 
@@ -170,7 +190,7 @@ Activate it on Windows PowerShell:
 
 ### Step 3: Install Dependencies
 
-```bash
+```powershell
 pip install -r requirements.txt
 ```
 
@@ -178,13 +198,11 @@ pip install -r requirements.txt
 
 Create a copy of `.env.example` and name it `.env`.
 
-On Windows PowerShell:
-
 ```powershell
 Copy-Item .env.example .env
 ```
 
-Open `.env` and enter your local MySQL credentials.
+Open `.env` and enter your local MySQL credentials and application configuration.
 
 Example:
 
@@ -194,6 +212,8 @@ DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=kopano_inventory
 DB_PORT=3306
+FLASK_ENV=development
+SECRET_KEY=replace_with_a_secure_random_key
 ```
 
 The `.env` file contains local credentials and must not be committed to GitHub.
@@ -215,21 +235,17 @@ This creates the database tables and inserts the sample data.
 
 Activate the virtual environment and execute:
 
-```bash
+```powershell
 python app.py
 ```
 
 Open the dashboard in a browser:
 
-```text
-http://127.0.0.1:5000/
-```
+`http://127.0.0.1:5000/`
 
 The contents page is available at:
 
-```text
-http://127.0.0.1:5000/contents
-```
+`http://127.0.0.1:5000/contents`
 
 ## 7. REST API Endpoints
 
@@ -237,24 +253,26 @@ The Flask application provides REST API endpoints for inventory, suppliers, deli
 
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/api/products` | Retrieve products with pagination and filtering. |
-| GET | `/api/products/low-stock` | Retrieve low-stock products. |
-| POST | `/api/products` | Create a product. |
-| PUT | `/api/products/<id>` | Update a product. |
-| DELETE | `/api/products/<id>` | Delete a product. |
-| GET | `/api/suppliers` | Retrieve suppliers. |
-| POST | `/api/suppliers` | Create a supplier. |
-| PUT | `/api/suppliers/<id>` | Update a supplier. |
-| DELETE | `/api/suppliers/<id>` | Delete a supplier. |
-| GET | `/api/deliveries` | Retrieve deliveries. |
-| POST | `/api/deliveries` | Create a delivery. |
-| PUT | `/api/deliveries/<id>` | Update a delivery. |
-| DELETE | `/api/deliveries/<id>` | Delete a delivery. |
-| GET | `/api/dashboard/summary` | Retrieve dashboard summary statistics. |
+| GET | `/api/products` | Retrieve products with pagination and filtering |
+| GET | `/api/products/low-stock` | Retrieve low-stock products |
+| POST | `/api/products` | Create a product |
+| PUT | `/api/products/<id>` | Update a product |
+| DELETE | `/api/products/<id>` | Delete a product |
+| GET | `/api/suppliers` | Retrieve suppliers |
+| POST | `/api/suppliers` | Create a supplier |
+| PUT | `/api/suppliers/<id>` | Update a supplier |
+| DELETE | `/api/suppliers/<id>` | Delete a supplier |
+| GET | `/api/deliveries` | Retrieve deliveries |
+| POST | `/api/deliveries` | Create a delivery |
+| PUT | `/api/deliveries/<id>` | Update a delivery |
+| DELETE | `/api/deliveries/<id>` | Delete a delivery |
+| GET | `/api/dashboard/summary` | Retrieve dashboard summary statistics |
 
 The API uses JSON for data exchange and communicates with the MySQL database.
 
-## 8. EOQ Model and Testing
+The product listing endpoint supports pagination and filtering. Input validation, parameterised database queries and centralised API error responses are implemented.
+
+## 8. EOQ Model and Automated Testing
 
 The project includes a standalone Python EOQ model located in:
 
@@ -266,43 +284,67 @@ The model provides calculations for:
 - Number of orders per year.
 - Total annual ordering and holding costs.
 
-Automated unit tests are located in:
+Automated tests are located in:
 
-`tests/test_eoq.py`
+- `tests/test_eoq.py`
+- `tests/test_api.py`
 
-Run the tests using:
+The EOQ tests check calculation accuracy and invalid input handling. The API tests check request validation, pagination, HTTP errors and invalid data.
 
-```bash
+Run all tests using:
+
+```powershell
 python -m unittest discover -s tests -v
 ```
 
-The tests cover calculation accuracy and input validation.
+The current test suite contains 15 passing tests.
 
 ## 9. Configuration and Security
 
-The project uses environment variables to manage database credentials.
+The project uses environment variables to manage database credentials and application configuration.
 
 - `.env` stores local database credentials.
 - `.env.example` provides a configuration template.
+- `config.py` defines development, testing and production configurations.
 - `.gitignore` prevents sensitive environment files and unnecessary generated files from being committed.
-- Parameterized SQL queries are used for database operations.
-- Flask logging is used to record application activity and errors.
+- Parameterised SQL queries are used for database operations.
+- Flask logging records application errors.
+- API validation checks incoming data before database operations.
 
-## 10. Current Development Status
+## 10. Operational Impact and Sustainability
 
-The application has progressed from a frontend prototype to a Flask and MySQL integrated system.
+The Kopano Home & Lifestyle Inventory Dashboard is intended to improve inventory-management processes by centralising product, supplier and delivery information.
 
-Completed functionality includes:
+The following operational improvements are supported by the implemented system:
 
-- MySQL database with three related tables.
-- Database connectivity through Flask.
-- REST API operations for products, suppliers and deliveries.
-- Dashboard data retrieved from the database.
-- Stock updates saved to MySQL.
-- Delivery status updates saved to MySQL.
-- EOQ model and automated unit tests.
+| Area | Manual process | Dashboard-supported process |
+|---|---|---|
+| Inventory visibility | Checking stock records separately | Centralised inventory dashboard |
+| Low-stock monitoring | Manually checking quantities | Automated low-stock identification |
+| Stock updates | Manual recording | Updates saved directly to MySQL |
+| Delivery tracking | Separate delivery records | Centralised delivery status monitoring |
+| Purchasing decisions | Manual quantity calculations | EOQ calculations to support ordering decisions |
 
-Further deployment documentation, backup and recovery procedures, and final integration checks form part of the project completion process.
+### Sustainability Considerations
+
+The system can support more efficient resource management through:
+
+- Better stock visibility, which can help identify excess or insufficient inventory.
+- Low-stock monitoring, which can help reduce the risk of stock shortages.
+- EOQ calculations, which can support more informed ordering decisions.
+- Centralised records, which reduce reliance on separate manual tracking processes.
+
+These are expected operational benefits based on the implemented functionality. No quantified before-and-after time savings, cost reductions or environmental improvements were measured during the project.
+
+### Future Scalability
+
+The application provides a foundation that could be extended with:
+
+- Additional product and supplier records.
+- User authentication and role-based access.
+- More detailed inventory reporting.
+- Automated reorder notifications.
+- Integration with additional business systems.
 
 ## 11. Deployment, Backup and Recovery
 
@@ -338,17 +380,11 @@ The user selects an existing backup file and must explicitly confirm the recover
 
 **Warning:** Restoring a database backup can overwrite existing database records. A backup of the current database should be created before performing a recovery.
 
-### Environment Configuration
-
-Database credentials are stored in a local `.env` file and are excluded from version control.
-
-The `.env.example` file provides a template for configuring the application on another computer.
-
 ### Logging
 
-The application records activity and errors through Python logging. Log information is written to the terminal and `kopano.log`.
+The application records errors through Python logging. Log information is written to the terminal and `kopano.log`.
 
-### Deployment Considerations
+### Production Deployment Considerations
 
 Before production deployment:
 
@@ -360,11 +396,15 @@ Before production deployment:
 - Test database recovery procedures.
 - Monitor application logs and database availability.
 
-## 12. Team Contributions
+## 12. Team Collaboration
 
-| Team Member | Student Number | Contribution |
+The project was developed collaboratively by the three group members.
+
+| Team Member | Student Number | Main Responsibility |
 |---|---|---|
-| Wazeer Parker | U21529320 | 33.33 |
-| Fayyad Gani | U23629968 | 33.33 |
-| Ilma Osman | U23528037 | 33.33 |
+| Wazeer Parker | U21529320 | Web application development, backend implementation, database integration and testing |
+| Fayyad Gani | U23629968 | Report research, preparation and documentation |
+| Ilma Osman | U23528037 | Report research, preparation and documentation |
+
+Git and GitHub were used for version control and project collaboration.
 
