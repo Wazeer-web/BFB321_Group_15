@@ -8,9 +8,14 @@ A web-based inventory dashboard developed for the BFB321 project. The system bri
 | Name | Student number | Main contribution |
 |---|---|---|
 | Wazeer Parker | U21529320 | Web application development, backend implementation, database integration and testing |
-| Fayyad Gani | U23629968 | Report research, preparation and documentation |
-| Ilma Osman | U23528037 | Report research, preparation and documentation |
+| Fayyad Gani | U23629968 | Backend implementation, report preparation and documentation |
+| Ilma Osman | U23528037 | database intergration, report preparation and documentation |
 
+All three group members participated in developing the Kopano Home & Lifestyle inventory management application. The group worked collaboratively on a shared laptop, using Wazeer Parker’s GitHub account to manage and upload the project files.
+
+As a result, the GitHub commit history mainly reflects one account, although the development work was completed collectively. The group collaborated on the application functionality, database integration, testing and documentation.
+
+All members contributed to discussions, problem-solving and reviewing the final application.
 ## What the system does
 
 ### Inventory
